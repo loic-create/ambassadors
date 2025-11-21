@@ -20,7 +20,7 @@
       --radius-xl: 18px;
       --radius-md: 14px;
       --radius-pill: 999px;
-      --bg-soft: rgba(255, 255, 255, 0.92);
+      --bg-soft: rgba(255, 255, 255, 0.96);
     }
 
     * {
@@ -33,11 +33,11 @@
       font-family: "Poppins", sans-serif;
       min-height: 100vh;
       background: radial-gradient(circle at top left, var(--tftp-light) 0%, #ffffff 40%, var(--tftp-dark) 100%);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 24px;
       color: var(--tftp-black);
+      padding: 24px;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
     }
 
     main.card {
@@ -49,6 +49,17 @@
       padding: 26px 26px 30px;
       backdrop-filter: blur(16px);
       border: 1px solid rgba(0, 151, 163, 0.18);
+    }
+
+    /* Top bar feel */
+    main.card::before {
+      content: "";
+      display: block;
+      height: 4px;
+      border-radius: 999px;
+      background: linear-gradient(90deg, var(--tftp-primary), var(--tftp-light));
+      margin-bottom: 12px;
+      opacity: 0.9;
     }
 
     .pill {
@@ -81,6 +92,14 @@
     }
 
     @media (max-width: 720px) {
+      body {
+        padding: 12px;
+      }
+      main.card {
+        padding: 18px 14px 22px;
+        border-radius: 12px;
+        box-shadow: 0 10px 22px rgba(0,0,0,0.16);
+      }
       header {
         flex-direction: column;
         align-items: flex-start;
@@ -96,6 +115,7 @@
       align-items: center;
       justify-content: center;
       box-shadow: 0 10px 28px rgba(0, 151, 163, 0.35);
+      flex-shrink: 0;
     }
     .logo-mark img {
       width: 46px;
@@ -108,6 +128,12 @@
       font-weight: 600;
       font-size: 24px;
       margin-bottom: 4px;
+    }
+
+    @media (max-width: 720px) {
+      h1 {
+        font-size: 20px;
+      }
     }
 
     .subtitle {
@@ -125,11 +151,11 @@
     .features-layout {
       display: flex;
       flex-direction: column;
-      gap: 20px;
+      gap: 18px;
       margin-top: 18px;
     }
 
-    /* Onglets (nouveau design plus lisible) */
+    /* Onglets */
     .tabs-nav {
       display: flex;
       flex-wrap: wrap;
@@ -139,6 +165,16 @@
       border-radius: var(--radius-pill);
       background: rgba(255, 255, 255, 0.9);
       box-shadow: inset 0 0 0 1px rgba(0, 47, 51, 0.08);
+      position: sticky;
+      top: 0;
+      z-index: 5;
+    }
+
+    @media (max-width: 720px) {
+      .tabs-nav {
+        position: static;
+        border-radius: 12px;
+      }
     }
 
     .tab-btn {
@@ -154,6 +190,7 @@
       color: rgba(0, 47, 51, 0.8);
       position: relative;
       transition: background 0.15s ease, color 0.15s ease, box-shadow 0.15s ease, transform 0.08s ease;
+      white-space: nowrap;
     }
 
     .tab-btn:hover {
@@ -186,16 +223,23 @@
     }
 
     .feature {
-      background: rgba(255, 255, 255, 0.9);
+      background: rgba(255, 255, 255, 0.98);
       border-radius: var(--radius-md);
-      border: 1px solid rgba(0, 47, 51, 0.1);
+      border: 1px solid rgba(0, 47, 51, 0.08);
       padding: 18px 16px 16px;
-      box-shadow: 0 8px 22px rgba(0, 0, 0, 0.06);
+      box-shadow: 0 8px 22px rgba(0, 0, 0, 0.04);
       display: none; /* géré par les onglets */
     }
 
     .feature.is-active {
       display: block;
+    }
+
+    @media (max-width: 720px) {
+      .feature {
+        padding: 14px 12px 14px;
+        border-radius: 10px;
+      }
     }
 
     .feature-header {
@@ -346,6 +390,7 @@
       grid-template-columns: 1.1fr 1fr;
       gap: 14px;
       margin-top: 8px;
+      align-items: flex-start;
     }
     @media (max-width: 720px) {
       .sig-layout {
@@ -357,7 +402,7 @@
       padding: 10px;
       border-radius: 12px;
       background: rgba(255, 255, 255, 0.75);
-      border: 1px solid rgba(0, 0, 0, 0.08);
+      border: 1px solid rgba(0, 0, 0, 0.06);
     }
 
     /* STORY GENERATOR (feature 2) */
@@ -463,7 +508,7 @@
 
     canvas {
       width: 100%;
-      max-width: 220px; /* réduit pour économiser de la hauteur */
+      max-width: 220px;
       border-radius: 22px;
       background: #f3f4f6;
       box-shadow: 0 8px 22px rgba(0, 0, 0, 0.12);
@@ -502,6 +547,13 @@
       white-space: pre-line;
     }
 
+    .post-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 4px;
+    }
+
     .copy-status {
       font-size: 11px;
       opacity: 0.7;
@@ -525,7 +577,6 @@
           <span class="pill-dot"></span> Outils ambassadeur · Team for the Planet
         </div>
         <h1>Amplifie ton impact en quelques clics</h1>
-        <!-- textes superflus vidés -->
         <p class="subtitle"></p>
         <p class="page-intro"></p>
       </div>
@@ -563,7 +614,6 @@
             <div class="feature-title">Génère ta signature en 10 secondes</div>
           </div>
         </div>
-        <!-- texte superflu retiré -->
         <p class="feature-caption"></p>
 
         <div class="sig-layout">
@@ -582,7 +632,6 @@
             <button id="copySignatureButton" class="btn-main" style="margin-top:10px;">
               Copier la signature
             </button>
-            <!-- texte superflu retiré -->
             <p id="statusText" class="small" style="margin-top:4px;"></p>
           </div>
 
@@ -613,7 +662,6 @@
           <!-- Étape 1 -->
           <div id="step-1" class="story-step active">
             <div class="story-step-title">1/3 – Comment tu as découvert TFTP ?</div>
-            <!-- texte "En quelques phrases" retiré -->
             <label for="q1"></label>
             <textarea id="q1" class="story-textarea" placeholder="Ex. Un ami m’en a parlé, j’ai vu une vidéo, je suis tombé sur un post LinkedIn…"></textarea>
             <button class="btn-main" id="next-1" style="margin-top:8px;">Suivant</button>
@@ -642,7 +690,7 @@
 
             <div class="story-btn-row">
               <button class="btn-outline" id="copy-btn">Copier le texte</button>
-              <button class="btn-secondary" id="share-linkedin-btn">Ouvrir sur LinkedIn</button>
+              <button class="btn-secondary" id="share-linkedin-btn">Poster sur LinkedIn</button>
               <button class="btn-secondary" id="restart-btn">Recommencer</button>
             </div>
 
@@ -671,7 +719,6 @@
 
         <div class="photo-layout">
           <div>
-            <!-- texte explicatif long retiré -->
             <p class="photo-info"></p>
 
             <label class="upload-label" for="fileInput">
@@ -689,7 +736,6 @@
 
           <div style="text-align:center;">
             <canvas id="canvas" width="600" height="600"></canvas>
-            <!-- texte "Aperçu : ..." retiré -->
             <p class="small" style="margin-top:6px; opacity:0.7;"></p>
           </div>
         </div>
@@ -706,7 +752,6 @@
             <div class="feature-title">Stock de posts clés en main</div>
           </div>
         </div>
-        <!-- texte explicatif long retiré -->
         <p class="feature-caption"></p>
 
         <div class="posts-grid">
@@ -716,9 +761,14 @@
             <button type="button" class="btn-link btn-read-more" data-target="post1">
               Lire la suite
             </button>
-            <button class="btn-outline btn-copy-post" data-target="post1">
-              Ouvrir ce post sur LinkedIn
-            </button>
+            <div class="post-actions">
+              <button type="button" class="btn-outline btn-copy-post" data-target="post1">
+                Copier le texte
+              </button>
+              <button type="button" class="btn-secondary btn-share-post" data-target="post1">
+                Poster sur LinkedIn
+              </button>
+            </div>
             <div class="copy-status" data-status-for="post1"></div>
           </article>
 
@@ -728,9 +778,14 @@
             <button type="button" class="btn-link btn-read-more" data-target="post2">
               Lire la suite
             </button>
-            <button class="btn-outline btn-copy-post" data-target="post2">
-              Ouvrir ce post sur LinkedIn
-            </button>
+            <div class="post-actions">
+              <button type="button" class="btn-outline btn-copy-post" data-target="post2">
+                Copier le texte
+              </button>
+              <button type="button" class="btn-secondary btn-share-post" data-target="post2">
+                Poster sur LinkedIn
+              </button>
+            </div>
             <div class="copy-status" data-status-for="post2"></div>
           </article>
 
@@ -740,9 +795,14 @@
             <button type="button" class="btn-link btn-read-more" data-target="post3">
               Lire la suite
             </button>
-            <button class="btn-outline btn-copy-post" data-target="post3">
-              Ouvrir ce post sur LinkedIn
-            </button>
+            <div class="post-actions">
+              <button type="button" class="btn-outline btn-copy-post" data-target="post3">
+                Copier le texte
+              </button>
+              <button type="button" class="btn-secondary btn-share-post" data-target="post3">
+                Poster sur LinkedIn
+              </button>
+            </div>
             <div class="copy-status" data-status-for="post3"></div>
           </article>
 
@@ -752,14 +812,18 @@
             <button type="button" class="btn-link btn-read-more" data-target="post4">
               Lire la suite
             </button>
-            <button class="btn-outline btn-copy-post" data-target="post4">
-              Ouvrir ce post sur LinkedIn
-            </button>
+            <div class="post-actions">
+              <button type="button" class="btn-outline btn-copy-post" data-target="post4">
+                Copier le texte
+              </button>
+              <button type="button" class="btn-secondary btn-share-post" data-target="post4">
+                Poster sur LinkedIn
+              </button>
+            </div>
             <div class="copy-status" data-status-for="post4"></div>
           </article>
         </div>
 
-        <!-- texte "Tu peux bien sûr tweaker..." retiré -->
         <p class="section-note"></p>
       </section>
     </section>
@@ -928,7 +992,7 @@
       }
     });
 
-    // Le reste (copy-btn, share-linkedin-btn, restart-btn) reste identique
+    // Bouton "Copier le texte"
     document.getElementById("copy-btn").addEventListener("click", async () => {
       const errorEl = document.getElementById("copy-error");
       errorEl.style.display = "none";
@@ -960,6 +1024,7 @@
       }
     });
 
+    // Bouton "Poster sur LinkedIn"
     document.getElementById("share-linkedin-btn").addEventListener(
       "click",
       async () => {
@@ -1007,7 +1072,14 @@
     const photoStatus = document.getElementById("photoStatus");
 
     const logoImg = new Image();
+    // même chemin que ton fichier d’origine
     logoImg.src = "Logo-time-planet-.png";
+    // Redessine quand le logo est chargé (si l’utilisateur a déjà une image)
+    logoImg.onload = () => {
+      if (userImage) {
+        drawPreview();
+      }
+    };
 
     let userImage = null;
 
@@ -1059,17 +1131,19 @@
       ctx.stroke();
 
       // Logo centré vers le bas
-      const logoSize = radius * 0.7;
-      const logoX = centerX - logoSize / 2;
-      const logoY = centerY + radius - logoSize - radius * 0.08;
+      if (logoImg.complete) {
+        const logoSize = radius * 0.7;
+        const logoX = centerX - logoSize / 2;
+        const logoY = centerY + radius - logoSize - radius * 0.08;
 
-      ctx.save();
-      ctx.beginPath();
-      ctx.arc(centerX, logoY + logoSize / 2, logoSize / 2 + 4, 0, Math.PI * 2);
-      ctx.fillStyle = "rgba(255,255,255,0.92)";
-      ctx.fill();
-      ctx.drawImage(logoImg, logoX, logoY, logoSize, logoSize);
-      ctx.restore();
+        ctx.save();
+        ctx.beginPath();
+        ctx.arc(centerX, logoY + logoSize / 2, logoSize / 2 + 4, 0, Math.PI * 2);
+        ctx.fillStyle = "rgba(255,255,255,0.92)";
+        ctx.fill();
+        ctx.drawImage(logoImg, logoX, logoY, logoSize, logoSize);
+        ctx.restore();
+      }
     }
 
     fileInput.addEventListener("change", (event) => {
@@ -1092,13 +1166,23 @@
     });
 
     downloadBtn.addEventListener("click", () => {
-      const link = document.createElement("a");
-      link.download = "photo-profil-team-for-the-planet.png";
-      link.href = canvas.toDataURL("image/png");
-      link.click();
+      try {
+        const dataURL = canvas.toDataURL("image/png");
+        const link = document.createElement("a");
+        link.download = "photo-profil-team-for-the-planet.png";
+        link.href = dataURL;
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        photoStatus.textContent = "Image téléchargée ✅";
+      } catch (e) {
+        console.error("Erreur lors du téléchargement de l’image", e);
+        photoStatus.textContent =
+          "Impossible de générer le téléchargement. Vérifie ton navigateur ou les autorisations.";
+      }
     });
 
-    /* ---------- 4. POSTS PRÊTS À POSTER → BROUILLON LINKEDIN + LIRE LA SUITE ---------- */
+    /* ---------- 4. POSTS PRÊTS À POSTER → LIRE LA SUITE + COPIER / POSTER ---------- */
 
     // Injection des textes depuis posts.js + gestion "Lire la suite"
     if (Array.isArray(window.postsData)) {
@@ -1146,8 +1230,8 @@
       });
     }
 
+    // Boutons "Copier le texte"
     const postCopyButtons = document.querySelectorAll(".btn-copy-post");
-
     postCopyButtons.forEach((btn) => {
       btn.addEventListener("click", async () => {
         const targetId = btn.getAttribute("data-target");
@@ -1163,7 +1247,43 @@
           `.copy-status[data-status-for="${targetId}"]`
         );
 
-        // On tente de copier pour que la personne puisse recoller si besoin
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          try {
+            await navigator.clipboard.writeText(text);
+            if (statusEl) {
+              statusEl.textContent = "Texte copié ✅";
+            }
+          } catch (e) {
+            console.error(e);
+            if (statusEl) {
+              statusEl.textContent =
+                "Impossible de copier automatiquement, copie-colle le texte manuellement.";
+            }
+          }
+        } else if (statusEl) {
+          statusEl.textContent =
+            "Sélectionne et copie le texte manuellement.";
+        }
+      });
+    });
+
+    // Boutons "Poster sur LinkedIn"
+    const postShareButtons = document.querySelectorAll(".btn-share-post");
+    postShareButtons.forEach((btn) => {
+      btn.addEventListener("click", async () => {
+        const targetId = btn.getAttribute("data-target");
+        const textEl = document.getElementById(targetId);
+        if (!textEl) return;
+
+        const text =
+          (textEl.dataset && textEl.dataset.fullText) ||
+          textEl.innerText.trim();
+        if (!text) return;
+
+        const statusEl = document.querySelector(
+          `.copy-status[data-status-for="${targetId}"]`
+        );
+
         if (navigator.clipboard && navigator.clipboard.writeText) {
           try {
             await navigator.clipboard.writeText(text);
@@ -1172,10 +1292,14 @@
             }
           } catch (e) {
             console.error(e);
+            if (statusEl) {
+              statusEl.textContent =
+                "LinkedIn s’ouvre. Si besoin, copie le texte manuellement.";
+            }
           }
         } else if (statusEl) {
           statusEl.textContent =
-            "LinkedIn va s’ouvrir. Si besoin, sélectionne et copie le texte à la main.";
+            "LinkedIn s’ouvre. Si besoin, copie le texte manuellement.";
         }
 
         const encoded = encodeURIComponent(text);
